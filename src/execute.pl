@@ -61,7 +61,7 @@ chdir( $working_dir );
 # HTML-ize source code
 #=============================================================================
 my $beautifier = new Web_CAT::Beautifier;
-$beautifier->beautifyCwd( $cfg, [ '__coverage__.txt' ] );
+$beautifier->beautifyCwd( $cfg, [ '__coverage__.txt', 'coverage.txt' ] );
 
 
 #=============================================================================
@@ -153,7 +153,8 @@ open( HTML, ">$report" ) ||
     die "Cannot open '$report': $!";
 
 print HTML<<EOF;
-<div class="shadow"><table><tbody>
+<div class="module"><div dojoType="webcat.TitlePane" title="Summary">
+<table><tbody>
 <tr><th colspan="3">Correctness Based on Your Tests</th></tr>
 <tr><td valign="top" align="right"><b>Your Program</b></td>
 <td valign="top">
@@ -182,8 +183,7 @@ print HTML<<EOF;
 <tr><td colspan="3" align="center">Score = $score_equation</td></tr>
 EOF
 }
-print HTML "</table></div><div class=\"spacer\">&nbsp;</div>\n";
-
+print HTML "</table></div></div>\n";
 close(HTML);
 }
 

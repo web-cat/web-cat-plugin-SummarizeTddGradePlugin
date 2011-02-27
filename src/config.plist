@@ -2,8 +2,8 @@
     name       = SummarizeTddGradePlugin;
     version.major    = 1;
     version.minor    = 0;
-    version.revision = 1;
-    version.date     = 20070301;
+    version.revision = 2;
+    version.date     = 20110226;
     requires         = ( PerlForPlugins );
     provider         = "Virginia Tech Computer Science";
     provider.url     = "http://web-cat.cs.vt.edu/updates";
