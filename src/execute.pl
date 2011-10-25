@@ -60,8 +60,14 @@ chdir( $working_dir );
 #=============================================================================
 # HTML-ize source code
 #=============================================================================
-my $beautifier = new Web_CAT::Beautifier;
-$beautifier->beautifyCwd( $cfg, [ '__coverage__.txt', 'coverage.txt' ] );
+my $beautify = $cfg->getProperty('SummarizeTddGradePlugin.beautify', 1);
+$beautify = ($beautify =~ m/^(true|on|yes|y|1)$/i);
+
+if ($beautify)
+{
+    my $beautifier = new Web_CAT::Beautifier;
+    $beautifier->beautifyCwd( $cfg, [ '__coverage__.txt', 'coverage.txt' ] );
+}
 
 
 #=============================================================================
@@ -196,6 +202,7 @@ my $reportCount = $cfg->getProperty( 'numReports', 0 );
 $reportCount++;
 $cfg->setProperty( "report${reportCount}.file",     "$report_relative" );
 $cfg->setProperty( "report${reportCount}.mimeType", "text/html" );
+$cfg->setProperty( "report${reportCount}.styleVersion", 1);
 
 # This was produced by the execute script
 if ( -f "$log_dir/student-tdd-report.txt" )
@@ -203,6 +210,7 @@ if ( -f "$log_dir/student-tdd-report.txt" )
     $reportCount++;
     $cfg->setProperty( "report${reportCount}.file", "student-tdd-report.txt" );
     $cfg->setProperty( "report${reportCount}.mimeType", "text/html" );
+    $cfg->setProperty( "report${reportCount}.styleVersion", 1);
 }
 
 if ( $student_passed == $student_total && -f "$log_dir/instr-tdd-report.txt" )
@@ -211,6 +219,7 @@ if ( $student_passed == $student_total && -f "$log_dir/instr-tdd-report.txt" )
 $reportCount++;
 $cfg->setProperty( "report${reportCount}.file",   "instr-tdd-report.txt" );
 $cfg->setProperty( "report${reportCount}.mimeType", "text/html" );
+$cfg->setProperty( "report${reportCount}.styleVersion", 1);
 }
 
 my $hintsReport = $cfg->getProperty( 'hintsReport' );
@@ -220,6 +229,7 @@ if ( defined( $hintsReport ) && -f "$log_dir/$hintsReport" )
 $reportCount++;
 $cfg->setProperty( "report${reportCount}.file",   "$hintsReport" );
 $cfg->setProperty( "report${reportCount}.mimeType", "text/html" );
+$cfg->setProperty( "report${reportCount}.styleVersion", 1);
 }
 
 $cfg->setProperty( "score.correctness", $final_score );

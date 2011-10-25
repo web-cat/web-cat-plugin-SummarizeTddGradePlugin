@@ -26,6 +26,16 @@ has been completed.";
     );
     options = (
         {
+            property    = "SummarizeTddGradePlugin.beautify";
+            type        = boolean;
+            default     = true;
+            name        = "Generate HTML Source Printout";
+            description =
+  "Determines whether this plug-in should generate HTML pretty-printed
+  versions of source files.  Turn this option off if other plug-ins
+  already perform this function.";
+        },
+        {
             property    = debug;
             type        = integer;
             advanced    = true;
